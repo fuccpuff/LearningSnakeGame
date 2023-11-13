@@ -42,13 +42,18 @@ namespace SnakeGame
             score = 0;
             gameOver = false;
             direction = Direction.Down;
+
+            gameTimer.Stop(); // Останавливаем таймер
+            gameTimer.Tick -= Update; // Удаляем предыдущую подписку на событие Tick
+            gameTimer.Tick += Update; // Подписываемся заново на событие Tick
             gameTimer.Interval = 100; // Скорость игры
-            gameTimer.Tick += Update;
-            gameTimer.Start();
+            gameTimer.Start(); // Запускаем таймер
+
             GenerateFood();
 
             lblGameOver.Visible = false;
         }
+
 
         private void GenerateFood()
         {
