@@ -16,10 +16,20 @@ namespace SnakeGame
         private bool gameOver;
 
         private System.Windows.Forms.Timer gameTimer = new System.Windows.Forms.Timer();
+        private Label label1;
 
         public Form1()
         {
             InitializeComponent();
+
+            lblGameOver = new Label
+            {
+                Size = new Size(200, 70),
+                TextAlign = ContentAlignment.MiddleCenter,
+                Visible = false
+            };
+            pbCanvas.Controls.Add(lblGameOver);
+
             InitializeGame();
         }
 
@@ -36,6 +46,8 @@ namespace SnakeGame
             gameTimer.Tick += Update;
             gameTimer.Start();
             GenerateFood();
+
+            lblGameOver.Visible = false;
         }
 
         private void GenerateFood()
@@ -58,6 +70,7 @@ namespace SnakeGame
                     Close();
                 }
             }
+
             MoveSnake();
             pbCanvas.Invalidate(); // Перерисовка PictureBox
         }
@@ -123,6 +136,7 @@ namespace SnakeGame
         private void pbCanvas_Paint(object sender, PaintEventArgs e)
         {
             Graphics canvas = e.Graphics;
+
             if (!gameOver)
             {
                 // Отрисовка змейки
@@ -131,18 +145,15 @@ namespace SnakeGame
                     Brush snakeColor = i == 0 ? Brushes.Black : Brushes.Green;
                     canvas.FillRectangle(snakeColor, new Rectangle(snake[i].X * 10, snake[i].Y * 10, 10, 10));
                 }
+
                 // Отрисовка еды
                 canvas.FillRectangle(Brushes.Red, new Rectangle(food.X * 10, food.Y * 10, 10, 10));
             }
             else
             {
-                string gameOverText = $"Игра окончена\nВаш счет: {score}";
-                Label lblGameOver = new Label();
-                lblGameOver.Text = gameOverText;
-                lblGameOver.Size = new Size(200, 70);
-                lblGameOver.TextAlign = ContentAlignment.MiddleCenter;
-                pbCanvas.Controls.Add(lblGameOver);
+                lblGameOver.Text = $"Игра окончена\nВаш счет: {score}";
                 lblGameOver.Location = new Point((pbCanvas.Width - lblGameOver.Width) / 2, (pbCanvas.Height - lblGameOver.Height) / 2);
+                lblGameOver.Visible = true;
             }
         }
 
@@ -151,16 +162,20 @@ namespace SnakeGame
             switch (e.KeyCode)
             {
                 case Keys.Up:
-                    direction = Direction.Up;
+                    if (direction != Direction.Down)
+                        direction = Direction.Up;
                     break;
                 case Keys.Down:
-                    direction = Direction.Down;
+                    if (direction != Direction.Up)
+                        direction = Direction.Down;
                     break;
                 case Keys.Left:
-                    direction = Direction.Left;
+                    if (direction != Direction.Right)
+                        direction = Direction.Left;
                     break;
                 case Keys.Right:
-                    direction = Direction.Right;
+                    if (direction != Direction.Left)
+                        direction = Direction.Right;
                     break;
             }
         }

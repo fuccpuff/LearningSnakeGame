@@ -73,6 +73,6 @@
 
         private PictureBox pbCanvas;
         private System.Windows.Forms.Timer timer1;
-        private Label label1;
+        private Label lblGameOver;
     }
 }
