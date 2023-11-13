@@ -1,6 +1,6 @@
 ﻿namespace SnakeGame
 {
-    partial class Змейка
+    partial class Snake
     {
         /// <summary>
         ///  Required designer variable.
@@ -43,13 +43,13 @@
             this.pbCanvas.TabStop = false;
             this.pbCanvas.Paint += new System.Windows.Forms.PaintEventHandler(this.pbCanvas_Paint);
             // 
-            // Змейка
+            // Snake
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.pbCanvas);
-            this.Name = "Змейка";
+            this.Name = "Snake";
             this.Text = "Form1";
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.pbCanvas)).EndInit();

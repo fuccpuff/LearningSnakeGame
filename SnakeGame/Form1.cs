@@ -5,7 +5,7 @@ using System.Windows.Forms;
 
 namespace SnakeGame
 {
-    public partial class Змейка : Form
+    public partial class Snake : Form
     {
         private List<Point> snake = new List<Point>();
         private Point food = new Point();
@@ -17,7 +17,7 @@ namespace SnakeGame
 
         private System.Windows.Forms.Timer gameTimer = new System.Windows.Forms.Timer();
 
-        public Змейка()
+        public Snake()
         {
             InitializeComponent();
 
